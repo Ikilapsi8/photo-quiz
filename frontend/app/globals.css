@@ -1,0 +1,106 @@
+@import "tailwindcss";
+
+/* ─── Custom animation tokens (Tailwind v4 @theme) ──────────────────────── */
+@theme {
+  --animate-float-up: float-up 1.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  --animate-fade-in: fade-in 0.25s ease-out forwards;
+  --animate-scale-in: scale-in 0.2s ease-out forwards;
+}
+
+@keyframes float-up {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  15% {
+    transform: translateY(-24px) scale(1.25);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-110px) scale(0.85);
+    opacity: 0;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ─── Safe-area helpers ──────────────────────────────────────────────────── */
+:root {
+  --sat: env(safe-area-inset-top, 0px);
+  --sab: env(safe-area-inset-bottom, 0px);
+  --sal: env(safe-area-inset-left, 0px);
+  --sar: env(safe-area-inset-right, 0px);
+}
+
+/* ─── Base ───────────────────────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+  scrollbar-gutter: stable;
+}
+
+body {
+  background-color: #050508;
+  color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ─── Reduced-motion ─────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ─── Focus ring ─────────────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid #7c3aed;
+  outline-offset: 2px;
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* ─── Selection ──────────────────────────────────────────────────────────── */
+::selection {
+  background: rgba(124, 58, 237, 0.4);
+}
