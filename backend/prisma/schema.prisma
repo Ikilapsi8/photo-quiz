@@ -1,0 +1,34 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Question {
+  id              Int      @id @default(autoincrement())
+  index           Int      @unique
+  imageUrl        String
+  prompt          String
+  optionsJson     String   // JSON array: [{ id: string, label: string }]
+  correctOptionId String
+}
+
+model GameResult {
+  id        Int            @id @default(autoincrement())
+  roomId    String
+  startedAt DateTime
+  endedAt   DateTime
+  players   PlayerResult[]
+}
+
+model PlayerResult {
+  id           Int        @id @default(autoincrement())
+  gameResultId Int
+  gameResult   GameResult @relation(fields: [gameResultId], references: [id])
+  playerId     String
+  nickname     String
+  totalScore   Int
+}
